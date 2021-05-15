@@ -5,6 +5,8 @@ const forecast = (Lat, Long, callback) => {
     const WeatherStackLocation = '&query=' + Lat + ',' +Long
     const Unit = '&units=' + 'f'
     const WeatherUrl = 'http://api.weatherstack.com/current?'+ WeatherStackKey + WeatherStackLocation + Unit
+    
+  
 
     request({ url: WeatherUrl, json: true }, (error, {body}) => {
         if (error) {
@@ -12,9 +14,10 @@ const forecast = (Lat, Long, callback) => {
         }   else if (body.error) {
             callback('Unable to find location', undefined)
         }   else {
-            callback(undefined, 'It is ' + body.current.weather_descriptions[0] + ' and currently ' + body.current.temperature + ' degrees out. It feels like ' + body.current.feelslike + ' degrees out.'
+            callback(undefined, 'It is ' + body.current.weather_descriptions[0] + ' and currently ' + body.current.temperature + ' degrees out. It feels like ' + body.current.feelslike + ' degrees out. Is it still light out? ' + body.current.is_day + "."
             )}
     })
 
 }
+
 module.exports = forecast
